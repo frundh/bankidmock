@@ -1,6 +1,10 @@
 # BankID Mock
 
-BankID Mock is a development tool designed to mimic the behavior of the actual BankID service by running an HTTP server. This mock service is intended for use in development environments, allowing developers to interact with a simulated BankID service without the need for actual communication with the production BankID infrastructure.
+BankID Mock is a development tool designed to mimic the behavior of the actual BankID service by running an HTTP server.
+This mock service is intended for use in development environments, allowing developers to interact with a simulated BankID service without the need for actual communication with the production BankID infrastructure.
+The API is designed from the BankID [specification](https://www.bankid.com/utvecklare/guider/teknisk-integrationsguide/graenssnittsbeskrivning).
+
+**Note** that this is currently under active development and is very bare bone and additional features may be added in the future.
 
 ## Table of Contents
 
@@ -10,6 +14,7 @@ BankID Mock is a development tool designed to mimic the behavior of the actual B
   - [Installation](#installation)
   - [Usage](#usage)
 - [Configuration](#configuration)
+- [TODO](#todo)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -69,6 +74,10 @@ You can configure the BankID Mock by adding environment variables. Adjust the fo
 **TODO**: Add more configuration options
 - [ ] `responseDelay`: Simulated response delay in milliseconds (default: `0`).
 - [ ] `logRequests`: Log incoming requests to the console (`true` or `false`, default: `true`). Currently there are some request logging but not really useful, mostly for logging errors.
+
+## TODO
+- [ ] Add more endpoints.
+- [ ] Add support for certificates.
 
 ## Contributing
 
