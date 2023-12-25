@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: build/Dockerfile
+    # Note: This rebuild trigger below requires docker compose version >= 2.22
+    develop:
+      watch:
+        - action: rebuild
+          files:
+            - ./**/*.go
+            - ./go.mod
+            - ./go.sum
+
