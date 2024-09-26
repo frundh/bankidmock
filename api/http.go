@@ -72,6 +72,7 @@ func (ctrl *Controller) Auth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(AuthResponseDTO{
 		OrderRef:       orderRef,
 		AutoStartToken: uuid.NewString(),
@@ -82,8 +83,6 @@ func (ctrl *Controller) Auth(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.Header().Set("Content-Type", "application/json")
 }
 
 func (ctrl *Controller) Collect(w http.ResponseWriter, r *http.Request) {
@@ -115,6 +114,7 @@ func (ctrl *Controller) Collect(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	if err := ctrl.db.Update(func(tx *bbolt.Tx) error {
 		bucket := tx.Bucket([]byte("orders"))
 		data := bucket.Get([]byte(collectReqDTO.OrderRef))
@@ -151,11 +151,24 @@ func (ctrl *Controller) Collect(w http.ResponseWriter, r *http.Request) {
 			OrderRef: collectReqDTO.OrderRef,
 			Status:   CollectStatusComplete,
 			HintCode: "",
+			CompletionData: CompletionData{
+				User: User{
+					PersonalNumber: "199001011234",
+					Name:           "John Doe",
+					GivenName:      "John",
+					Surname:        "Doe",
+				},
+				Device: Device{
+					IPAddress:        "127.0.0.1",
+					UniqueHardwareID: "1234567890",
+				},
+				BankIDIssueDate: time.Now(),
+				Signature:       "signature",
+				OCSPResponse:    "ocspResponse",
+			},
 		}); err != nil {
 			return err
 		}
-
-		w.Header().Set("Content-Type", "application/json")
 
 		return nil
 	}); err != nil {
