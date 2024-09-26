@@ -70,9 +70,10 @@ type CompletionData struct {
 }
 
 type CollectResponseDTO struct {
-	OrderRef string        `json:"orderRef"`
-	Status   CollectStatus `json:"status"`
-	HintCode HintCode      `json:"hintCode"`
+	OrderRef       string         `json:"orderRef"`
+	Status         CollectStatus  `json:"status"`
+	HintCode       HintCode       `json:"hintCode"`
+	CompletionData CompletionData `json:"completionData"`
 }
 
 type CancelRequestDTO struct {
